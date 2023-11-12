@@ -1,9 +1,16 @@
 #!/usr/bin/python3
 
-def square_matrix_simple(matrix = []):
-    result_matrix = [[0 for _ in range(len(matrix[0]))] for _ in range(len(matrix))]
-    for i in range(len(matrix)):
-        for j in range(len(matrix[0])):
-            result_maxtrix[i][j] = maxtrix[i][j] ** 2
-    
-    return result_matrix
+
+def square_matrix_simple(matrix=[]):
+    return list(map(lambda x: list(map(lambda y: y ** 2, x)), matrix))
+
+if __name__ == '__main__':
+    matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ]
+
+    new_matrix = square_matrix_simple(matrix)
+    print(new_matrix)
+    print(matrix)
