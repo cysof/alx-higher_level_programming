@@ -1,68 +1,53 @@
 #!/usr/bin/python3
 
+"""
+Create class Square that defines a square by private instance attribute: size
+And a Public instance method: def area(self):
+that returns the current square area
+Methods Getter and Setter properties for size.
+property def size(self): to retrieve it
+property setter def size(self, value): to set it:
+Method my_print prints the square using "#".
+"""
+
 
 class Square:
-    """Square class."""
-
+    """
+    Instantiating the variables self and size.
+    Raising errors if conditions are not met.
+    and print square using '#'.
+    """
     def __init__(self, size=0):
-        """__init__ method that sets the size of square.
-        Args:
-            size (int): size of Square
+        # Initialize private attribute
+        self.__size = size
 
-        """
-        self.size = size
-
-    def area(self):
-        """Gets the area of the Square.
-
-        Returns:
-            Area of squre
-
-        """
-        return self.__size * self.__size
-
-    @property
+    @property  # property to retrieve size (Getter method)
     def size(self):
         return self.__size
 
-    @size.setter
+    @size.setter  # Setter method for size
     def size(self, value):
-        """size setter  method that sets the size of square.
-        Args:
-            value (int): size of Square
-        Raises:
-            TypeError: If `value` is not an integer.
-            ValueError: If `value` is less than 0.
-
-        """
+        # Check if value is an integer
         if not isinstance(value, int):
             raise TypeError("size must be an integer")
+
+        # Check if value is >= 0
         if value < 0:
             raise ValueError("size must be >= 0")
+
+        # Update the private instance attribute
         self.__size = value
 
+    def area(self):
+        """
+        Calculates area of square
+        Returns: area
+        """
+        return (self.__size ** 2)
+
     def my_print(self):
-        """Prints a # representation of square based on size."""
-        for r in range(self.__size):
-            for c in range(self.__size):
-                print('#', end='')
-            print()
         if self.__size == 0:
             print()
-
-
-if __name__ == '__main__':
-    my_square = Square(3)
-    my_square.my_print()
-
-    print("--")
-
-    my_square.size = 10
-    my_square.my_print()
-
-    print("--")
-
-    my_square.size = 0
-    my_square.my_print()
-
-    print("--")
+        else:
+            for i in range(self.__size):
+                print("#" * self.__size)

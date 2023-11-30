@@ -1,34 +1,38 @@
 #!/usr/bin/python3
 
+"""
+class Square that defines a square
+Private instance attribute: size
+property def size(self): to retrieve it
+property setter def size(self, value): to set it:
+
+Private instance attribute: position
+which takes a default (0, 0) tuple.
+property def position(self): to retrieve it
+property setter def position(self, value): to set it:
+
+And a Public instance method: def area(self):
+that returns the current square area
+Method my_print prints the square using "#".
+"""
+
 
 class Square:
-    """Square class."""
-
+    """
+    Instantiating the variables self and size.
+    Raising errors if conditions are not met.
+    and print square using '#'.
+    """
     def __init__(self, size=0, position=(0, 0)):
-        """__init__ method that sets the size and position of square.
-        Args:
-            size (int): size of Square
-            position (tuple): poisition of Square
-
-        """
+        # Initialize private attributes
         self.size = size
         self.position = position
 
-    def area(self):
-        """Gets the area of the Square.
-
-        Returns:
-            Area of squre
-
-        """
-        return self.__size * self.__size
-
-    @property
+    @property  # property to retrieve size (Getter method)
     def size(self):
-        """gets size of square."""
         return self.__size
 
-    @size.setter
+    @size.setter  # Setter method for size
     def size(self, value):
         """size setter  method that sets the size of square.
         Args:
@@ -38,18 +42,22 @@ class Square:
             ValueError: If `value` is less than 0.
 
         """
+        # Check if value is an integer
         if not isinstance(value, int):
             raise TypeError("size must be an integer")
+
+        # Check if value is >= 0
         if value < 0:
             raise ValueError("size must be >= 0")
+
+        # Update the private instance attribute
         self.__size = value
 
-    @property
+    @property  # property to retrieve position (Getter method)
     def position(self):
-        """gets position of square."""
         return self.__position
 
-    @position.setter
+    @position.setter  # Setter method for position
     def position(self, value):
         """position setter method that sets position of Square.
         Args:
@@ -58,42 +66,28 @@ class Square:
             TypeError: If `value` is not a tuple of two positive integers
 
         """
-        if not isinstance(value, tuple):
+        # verify that is a tuple of 2 positive integers
+        if (not isinstance(value, tuple) or
+                len(value) != 2 or
+                not all(isinstance(num, int) for num in value) or
+                not all(num >= 0 for num in value)):
             raise TypeError("position must be a tuple of 2 positive integers")
-        elif len(value) != 2:
-            raise TypeError("position must be a tuple of 2 positive integers")
-        elif not isinstance(value[0], int) or not isinstance(value[1], int):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        elif (value[0] < 0 or value[1] < 0):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        else:
-            self.__position = value
+        self.__position = value  # Update the private instance attribute
+
+    def area(self):
+        """
+        Calculates area of square
+        Returns: area
+        """
+        return (self.__size ** 2)
 
     def my_print(self):
-        """Prints a # representation of square based on size."""
-
         if self.__size == 0:
             print()
+            return
         else:
             for i in range(self.__position[1]):
                 print()
-            for j in range(self.__size):
+            for i in range(self.__size):
                 print(' ' * self.__position[0], end='')
                 print('#' * self.__size)
-
-
-if __name__ == '__main__':
-    my_square_1 = Square(3)
-    my_square_1.my_print()
-
-    print("--")
-
-    my_square_2 = Square(3, (1, 1))
-    my_square_2.my_print()
-
-    print("--")
-
-    my_square_3 = Square(3, (3, 0))
-    my_square_3.my_print()
-
-    print("--")

@@ -1,56 +1,44 @@
 #!/usr/bin/python3
 
+"""
+Create class Square that defines a square by private instance attribute: size
+And a Public instance method: def area(self):
+that returns the current square area
+Methods Getter and Setter properties for size.
+property def size(self): to retrieve it
+property setter def size(self, value): to set it:
+"""
+
 
 class Square:
-    """Square class."""
-
+    """
+    Instantiating the variables self and size.
+    Raising errors if conditions are not met.
+    """
     def __init__(self, size=0):
-        """__init__ method that sets the size of square.
-        Args:
-            size (int): size of Square
+        # Initialize private attribute
+        self.__size = size
 
-        """
-        self.size = size
-
-    def area(self):
-        """Gets the area of the Square.
-
-        Returns:
-            Area of squre
-
-        """
-        return self.__size * self.__size
-
-    @property
+    @property  # property to retrieve size
     def size(self):
         return self.__size
 
-    @size.setter
+    @size.setter  # Setter method for size
     def size(self, value):
-        """size setter  method that sets the size of square.
-        Args:
-            value (int): size of Square
-        Raises:
-            TypeError: If `value` is not an integer.
-            ValueError: If `value` is less than 0.
-
-        """
+        # Check if value is an integer
         if not isinstance(value, int):
             raise TypeError("size must be an integer")
+
+        # Check if value is >= 0
         if value < 0:
             raise ValueError("size must be >= 0")
+
+        # Update the private instance attribute
         self.__size = value
 
-
-if __name__ == '__main__':
-    my_square = Square(89)
-    print("Area: {} for size: {}".format(my_square.area(), my_square.size))
-
-    my_square.size = 3
-    print("Area: {} for size: {}".format(my_square.area(), my_square.size))
-
-    try:
-        my_square.size = "5 feet"
-        print("Area: {} for size: {}".format(my_square.area(), my_square.size))
-    except Exception as e:
-        print(e)
+    def area(self):
+        """
+        Calculates area of square
+        Returns: area
+        """
+        return (self.__size ** 2)

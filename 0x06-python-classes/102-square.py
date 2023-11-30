@@ -1,84 +1,92 @@
 #!/usr/bin/python3
 
+"""
+Class Square that defines a square by private instance attribute: size
+Methods Getter and Setter properties for size.
+property def size(self): to retrieve it
+property setter def size(self, value): to set it:
+And a Public instance method: def area(self):
+that returns the current square area
+`Square` instance can answer to comparators:
+==, !=, >, >=, < and <= based on the square area
+"""
+
 
 class Square:
-    """Square class."""
-
+    """
+    Instantiating the variables self and size.
+    Raising errors if conditions are not met.
+    """
     def __init__(self, size=0):
-        """__init__ method that sets the size of square.
-        Args:
-            size (int): size of Square
+        # Initialize private attribute
+        self.__size = size
 
-        """
-        self.size = size
-
-    def area(self):
-        """Gets the area of the Square.
-
-        Returns:
-            Area of squre
-
-        """
-        return self.__size * self.__size
-
-    @property
+    @property  # property to retrieve size
     def size(self):
         return self.__size
 
-    @size.setter
+    @size.setter  # Setter method for size
     def size(self, value):
-        """size setter  method that sets the size of square.
-        Args:
-            value (int): size of Square
-        Raises:
-            TypeError: If `value` is not an integer.
-            ValueError: If `value` is less than 0.
+        # Check if value is an integer
+        if not isinstance(value, (float, int)):
+            raise TypeError("size must be an integer")
 
-        """
-        if not isinstance(value, int) and not isinstance(value, float):
-            raise TypeError("size must be a number")
+        # Check if value is >= 0
         if value < 0:
             raise ValueError("size must be >= 0")
+
+        # Update the private instance attribute
         self.__size = value
 
-    def __eq__(self, square):
-        """Implements equals"""
-        return self.area() == square.area()
+    def area(self):
+        """
+        Calculates area of square
+        Returns: area
+        """
+        return (self.__size ** 2)
 
-    def __ne__(self, square):
-        """Implements not equal"""
-        return self.area() != square.area()
+    # functions for comparators based on square area
+    def __eq__(self, other):
+        """
+        Compares current square with next
+        and return if both are equal
+        """
+        if isinstance(other, Square):
+            return self.area() == other.area()
 
-    def __gt__(self, square):
-        """Implements greater than"""
-        return self.area() > square.area()
+    def __ne__(self, other):
+        """
+        Compares and returns if not equal
+        """
+        if isinstance(other, Square):
+            return self.area() != other.area()
 
-    def __ge__(self, square):
-        """Implements greater or equal to"""
-        return self.area() >= square.area()
+    def __lt__(self, other):
+        """
+        Compares squares and return if current is less than next
+        """
+        if isinstance(other, Square):
+            return self.area() < other.area()
 
-    def __lt__(self, square):
-        """Implements less than"""
-        return self.area() < square.area()
+    def __lteq__(self, other):
+        """
+        Compares squares and return if curr is less than
+        OR equal to the next
+        """
+        if isinstance(other, Square):
+            return self.area() <= other.area()
 
-    def __le__(self, square):
-        """Implements less than or equal to"""
-        return self.area() <= square.area()
+    def __gt__(self, other):
+        """
+        Compares squares and return if current is greater than next
+        """
+        if isinstance(other, Square):
+            return self.area() > other.area()
 
-
-if __name__ == '__main__':
-    s_5 = Square(5)
-    s_6 = Square(6)
-
-    if s_5 < s_6:
-        print("Square 5 < Square 6")
-    if s_5 <= s_6:
-        print("Square 5 <= Square 6")
-    if s_5 == s_6:
-        print("Square 5 == Square 6")
-    if s_5 != s_6:
-        print("Square 5 != Square 6")
-    if s_5 > s_6:
-        print("Square 5 > Square 6")
-    if s_5 >= s_6:
-        print("Square 5 >= Square 6")
+    def __ge__(self, other):
+        """
+        Compares squares and return if curr is greater than
+        OR equal to the next
+        """
+        if isinstance(other, Square):
+            return self.area() >= other.area()
