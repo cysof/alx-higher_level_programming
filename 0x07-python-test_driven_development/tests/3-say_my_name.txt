@@ -1,39 +1,55 @@
-The ``3-say_my_name`` module
-======================
+# Setup: Import the module and function
+>>> mod = __import__("3-say_my_name")
+>>> say_my_name = mod.say_my_name
 
-Using ``say_my_name``
--------------------
+# Function Documentation
+>>> len(mod.__doc__) > 1
+True
 
-This is an example text file in reStructuredText format.  First import
-``say_my_name`` from the ``3-say_my_name`` module:
+# Function Documentation
+>>> len(say_my_name.__doc__) > 1
+True
 
--------------------
+# Test Cases
 
->>> say_my_name = __import__('3-say_my_name').say_my_name
+# Valid input with both first and last names😎
+>>> first_name = "Ayomide"
+>>> last_name = "Kayode"
+>>> say_my_name(first_name, last_name)
+My name is Ayomide Kayode
 
+>>> first_name = "Johnny"
+>>> last_name = "Bravo"
+>>> say_my_name(first_name, last_name)
+My name is Johnny Bravo
 
-# first_name = str, last_name = str
->>> say_my_name("Paco", "De Lucia")
-My name is Paco De Lucia
+# Valid input with only the first name
+>>> first_name = "Cobby"
+>>> say_my_name(first_name)
+My name is Cobby 
 
-# first_name = str, last_name = ""
->>> say_my_name("Tomatito")
-My name is Tomatito 
-
-# first_name = None, last_name = ""
->>> say_my_name(None)
+# Invalid input: first_name is not a string (invalid)
+>>> first_name = 123
+>>> last_name = "Olix"
+>>> say_my_name(first_name, last_name)
 Traceback (most recent call last):
-...
+    ...
 TypeError: first_name must be a string
 
-# first_name = None, last_name = None
->>> say_my_name(None, None)
+# Invalid input: last_name is not a string (invalid)
+>>> first_name = "Stephen"
+>>> last_name = None
+>>> say_my_name(first_name, last_name)
 Traceback (most recent call last):
-...
-TypeError: first_name must be a string
-
-# first_name = str, last_name = None
->>> say_my_name("Camaron", None)
-Traceback (most recent call last):
-...
+    ...
 TypeError: last_name must be a string
+
+# Invalid input: Both first_name and last_name are not strings (invalid)
+>>> first_name = 123
+>>> last_name = None
+>>> say_my_name(first_name, last_name)
+Traceback (most recent call last):
+    ...
+TypeError: first_name must be a string
+
+# run test case file with `python3 -m doctest -v ./tests/3-say_my_name.txt`

@@ -1,49 +1,30 @@
 #!/usr/bin/python3
 
-""" add_integer
-
-Adds two integers (a, b) and returns integer sum
-Floats get converted to integers, all others raise TypeError
+"""
+Function that adds two integers/float numbers.
+prototype: def add_integer(a, b=98):
+Returns an integer: the addition of a and b
 """
 
 
 def add_integer(a, b=98):
-    """ add_integer - adds two integers (a, b)
-    Returns: integer sum
     """
-    if not isinstance(a, int) and not isinstance(a, float):
+    Addition function of two integers.
+    Args:
+        a (int or float): The first number to be added.
+        b (int or float, optional): Second number to be added. Defaults to 98.
+    Raises:
+        TypeError: If either `a` or `b` is not an integer or float.
+    Returns:
+        int: The addition of `a` and `b` as an integer.
+    """
+    if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
-    if not isinstance(b, int) and not isinstance(b, float):
+
+    if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
+    # cast numbers into integers if they are float
+    a = int(a)
+    b = int(b)
 
-    if isinstance(a, float):
-        a = int(a)
-    if isinstance(b, float):
-        b = int(b)
-
-    return a + b
-
-
-if __name__ == '__main__':
-    print(add_integer(1, 2))
-    print(add_integer(100, -2))
-    print(add_integer(2))
-    print(add_integer(100.3, -2))
-    try:
-        print(add_integer(4, "School"))
-    except Exception as e:
-        print(e)
-    try:
-        print(add_integer(None))
-    except Exception as e:
-        print(e)
-
-    try:
-        print(add_integer(1.99, 3.5))
-    except Exception as e:
-        print(e)
-
-    try:
-        print(add_integer(None))
-    except Exception as e:
-        print(e)
+    return int(a) + int(b)

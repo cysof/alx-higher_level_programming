@@ -1,33 +1,26 @@
 #!/usr/bin/python3
 
+"""
+Print Square module
+The module prints a square using `#`
+Prototype: def print_square(size):
+size is the size length of the square
+Raise exceptions if size is not an int, or if size is less than 0,
+or if size is a float and also less than 0.
+"""
+
 
 def print_square(size):
-    """Prints a square with # representing dimensions
-    Arguments:
-        size (int): size of square
     """
+    Print a perfect sqaure, given a valid int argument.
+    """
+
     if not isinstance(size, int):
         raise TypeError("size must be an integer")
-    if size < 0:
+    elif size < 0:
         raise ValueError("size must be >= 0")
-    if isinstance(size, float) and size < 0:
+    elif type(size) is float and size < 0:
         raise TypeError("size must be an integer")
-    if size > 0:
-        for i in range(size):
+    else:
+        for x in range(size):
             print("#" * size)
-
-
-if __name__ == '__main__':
-    print_square(4)
-    print("")
-    print_square(10)
-    print("")
-    print_square(0)
-    print("")
-    print_square(1)
-    print("")
-    try:
-        print_square(-1)
-    except Exception as e:
-        print(e)
-    print("")

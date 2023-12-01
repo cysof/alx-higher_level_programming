@@ -1,45 +1,37 @@
 #!/usr/bin/python3
 
+"""
+Text Indentation module
+This module adds two new lines after these characters: ".?:"
+and doesn't print any spaces at the beginning or end
+of the given sentence.
+Prototype: def text_indentation(text):
+Raise exceptions if text is not a string.
+"""
+
 
 def text_indentation(text):
-    """Prints two new lines after
-    characters: ., ? and :
-    Args:
-        text (str): string text
-    Raises:
-        TypeError: if `text` is not string
+    """
+    Function that prints 2 new lines after these chars:
+    ".", "?" and ":"
     """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
-    string = ''
-    i = 0
-    while i < len(text):
-        string += text[i]
-        if text[i] in ['.', '?', ':']:
-            string = string.strip()
-            print(string + '\n')
-            try:
-                if text[i + 1] == ' ':
-                    i += 1
-            except IndexError:
-                pass
-            string = ''
-        i += 1
 
-    if len(string) > 0:
-        print(string, end="")
+    # initialize variable to hold final string
+    final_str = ""
 
+    # flag to skip/trim leading whitespaces
+    trim_spaces = True
 
-if __name__ == '__main__':
-    text_indentation("Lorem amet? consectetur adipiscing elit. Quonam: modo")
-    print()
-    text_indentation("text without characters")
-    print()
-    text_indentation("")
-    print()
-    text_indentation("hello.there")
-    print()
-    text_indentation("hello.")
-    print()
-    text_indentation("Holberton. School? How are you: John")
-    print()
+    # iterate through all chars in the given text
+    for char in text:
+        # check if char is one of these: '.', '?' or ':'
+        if char in ".?:":
+            final_str += char + "\n\n"  # add char and two new lines
+            trim_spaces = True  # set flag to skip leading whitespaces
+        elif char != " " or not trim_spaces:
+            final_str += char
+            trim_spaces = False  # reset flag if it's a non-space character
+
+    print(final_str)

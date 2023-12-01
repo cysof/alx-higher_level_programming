@@ -1,46 +1,65 @@
-The ``5-text_indentation`` module
-======================
+# Setup: Import the module and function
+>>> mod = __import__("5-text_indentation")
+>>> text_indentation = mod.text_indentation
 
-Using ``text_indentation``
--------------------
+# Function Documentation
+>>> len(mod.__doc__) > 1
+True
 
-This is an example text file in reStructuredText format.  First import
-``text_indentation`` from the ``5-text_indentation`` module:
+# Function Documentation
+>>> len(text_indentation.__doc__) > 1
+True
 
--------------------
+# Test Cases
 
->>> text_indentation = __import__('5-text_indentation').text_indentation
-
-
-# text = string with characters
->>> text = "blue. green: yellow? red"
+# Valid input: sentence with "."
+>>> text = "This is a sentence. It has two parts."
 >>> text_indentation(text)
-blue.
+This is a sentence.
 <BLANKLINE>
-green:
+It has two parts.
 <BLANKLINE>
-yellow?
 <BLANKLINE>
-red
 
-# text = string with no characters
->>> text_indentation("string with no characters")
-string with no characters
+# Valid input: sentence with "?"
+>>> text = "Is this a question? Yes, it is."
+>>> text_indentation(text)
+Is this a question?
+<BLANKLINE>
+Yes, it is.
+<BLANKLINE>
+<BLANKLINE>
 
-# text = integer
->>> text_indentation(5)
+# Valid input: sentence with ":"
+>>> text = "The Gates of Shell: I almost died!😅"
+>>> text_indentation(text)
+The Gates of Shell:
+<BLANKLINE>
+I almost died!😅
+
+# Valid input: sentence with multiple ".?:"
+>>> text = "Bad. Baddo: Baddest?"
+>>> text_indentation(text)
+Bad.
+<BLANKLINE>
+Baddo:
+<BLANKLINE>
+Baddest?
+<BLANKLINE>
+<BLANKLINE>
+
+# Valid input: sentence with spaces at the beginning and end (trimmed)
+>>> text = "    Test Driven Development.    "
+>>> text_indentation(text)
+Test Driven Development.
+<BLANKLINE>
+<BLANKLINE>
+
+# Invalid input: text is not a string (invalid)
+>>> text = 123
+>>> text_indentation(text)
 Traceback (most recent call last):
-...
+    ...
 TypeError: text must be a string
 
-
-# text = with no space
->>> text_indentation("hello.there")
-hello.
-<BLANKLINE>
-there
-
-# text = one match
->>> text_indentation("hello.")
-hello.
-<BLANKLINE>
+# run test case file with `python3 -m doctest -v ./tests/5-text_indentation.txt`
