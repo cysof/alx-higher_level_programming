@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 
 """
-Look up module
-create a function that returns the list of
-of available attributes and methods of an objects
+Lookup object module
+create a function with the prototype lookup(obj).
 """
 
 def lookup(obj):
