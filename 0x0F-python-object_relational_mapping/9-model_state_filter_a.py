@@ -20,25 +20,25 @@ from sqlalchemy.orm import sessionmaker
 if __name__ == "__main__":
 
     # Check if the number of arguments is correct
-            if len(argv) != 4:
-                print("Usage: {} <username> <password> <database>".format(argv[0]))
-                                exit()
+    if len(argv) != 4:
+        print("Usage: {} <username> <password> <database>".format(argv[0]))
+        exit()
 
-                                    # Creating the connection string (engine for database)
-                                        engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
-                                            argv[1], argv[2], argv[3]), pool_pre_ping=True)
+    # Creating the connection string (engine for database)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+        argv[1], argv[2], argv[3]), pool_pre_ping=True)
 
-                                        # Creating an instance of Session
-                                                Session = sessionmaker(bind=engine)
-                                                    session = Session()
+    # Creating an instance of Session
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-                                                        # Querying State Objects that contain the letter `a`
-                                                            filtered_states = session.query(State).filter(State.name.like(
-                                                                '%a%')).order_by(State.id).all()
+    # Querying State Objects that contain the letter `a`
+    filtered_states = session.query(State).filter(State.name.like(
+        '%a%')).order_by(State.id).all()
 
-                                                            # Displaying the results
-                                                                    for state in filtered_states:
-                                                                        print("{:d}: {:s}".format(state.id, state.name))
+    # Displaying the results
+    for state in filtered_states:
+        print("{:d}: {:s}".format(state.id, state.name))
 
-                                                                                    # Closing the session
-                                                                                        session.close()
+    # Closing the session
+    session.close()
